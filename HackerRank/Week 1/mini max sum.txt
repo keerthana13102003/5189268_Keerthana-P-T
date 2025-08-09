@@ -1,0 +1,31 @@
+//problem 2//
+
+#include <stdio.h>
+
+int main() {
+    long long a[5];
+    long long sum = 0;
+    long long min, max;
+    int i;
+
+    for (i = 0; i < 5; i++) {
+        scanf("%lld", &a[i]);
+        sum += a[i];
+    }
+
+    min = sum - a[0];
+    max = sum - a[0];
+
+    for (i = 1; i < 5; i++) {
+        long long temp = sum - a[i];
+        if (temp < min) {
+            min = temp;
+        }
+        if (temp > max) {
+            max = temp;
+        }
+    }
+
+    printf("%lld %lld", min, max);
+    return 0;
+}
