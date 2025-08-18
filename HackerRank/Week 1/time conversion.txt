@@ -1,0 +1,24 @@
+//problem 3//
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[11];
+    scanf("%s", s);
+
+    int hh, mm, ss;
+    char ampm[3];
+    
+   
+    sscanf(s, "%2d:%2d:%2d%2s", &hh, &mm, &ss, ampm);
+
+    if (strcmp(ampm, "AM") == 0) {
+        if (hh == 12) hh = 0; // midnight case
+    } else {
+        if (hh != 12) hh += 12; // afternoon case
+    }
+
+    printf("%02d:%02d:%02d\n", hh, mm, ss);
+    return 0;
+}
