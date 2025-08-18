@@ -11,7 +11,7 @@ int main() {
             letters[s[i] - 'a'] = 1;
         }
     }
-    for (i = 0; i < 26; i++) {
+    for (i=0; i<26; i++) {
         if (!letters[i]) {
             printf("not pangram");
             return 0;

@@ -8,7 +8,7 @@ int main() {
     scanf("%d", &totalStrings);
 
     char data[1000][25]; // store all main strings
-    for (int i = 0; i < totalStrings; i++) {
+    for (int i=0; i<totalStrings; i++) {
         scanf("%s", data[i]);
     }
 
@@ -16,13 +16,13 @@ int main() {
     scanf("%d", &totalQueries);
 
     char checkList[1000][25]; // store all queries
-    for (int i = 0; i < totalQueries; i++) {
+    for (int i=0; i<totalQueries; i++) {
         scanf("%s", checkList[i]);
     }
 
     for (int i = 0; i < totalQueries; i++) {
         int matchCount = 0;
-        for (int j = 0; j < totalStrings; j++) {
+        for (int j=0; j<totalStrings; j++) {
             if (strcmp(checkList[i], data[j]) == 0) {
                 matchCount++;
             }
