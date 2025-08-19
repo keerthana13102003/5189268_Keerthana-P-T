@@ -1,0 +1,22 @@
+//problem 6
+
+#include<stdio.h>
+#include<stdlib.h>
+int compare (const void*a, const void*b){
+    return(*(int*)a-*(int*)b);
+}
+int main(){
+int T,G,i,K,N;
+scanf("%d%d",&T,&G);
+int H[T];
+for(i=0;i<T;i++)
+scanf("%d",&H[i]);
+qsort(H,T,sizeof(int),compare);
+K=H[G-1]-H[0];
+for(i=1;i<=T-G;i++){
+N=H[i+G-1]-H[i];
+if(N<K)K=N;
+}
+printf("%d\n",K);
+return 0;
+}

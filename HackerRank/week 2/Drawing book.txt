@@ -1,0 +1,14 @@
+// problem 3
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+     int M,B;
+    scanf("%d%d",&M,&B);
+    int V=B/2;
+    int W=M/2-B/2;
+    int ans=V<W?V:W;
+    printf("%d",ans);
+    return 0;
+}

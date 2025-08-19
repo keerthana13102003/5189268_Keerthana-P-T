@@ -1,0 +1,26 @@
+//problem 1
+#include<stdio.h>
+int main (){
+    int r;
+    scanf("%d", &r);
+
+    int xcc[r], t, q, pairs = 0;
+
+    for(t=0; t<r; t++) {
+        scanf("%d", &xcc[t]);
+    }
+
+    for(t=0; t<r; t++) {
+        if(xcc[t] == -1) continue;
+        for(q = t + 1; q < r; q++) {
+            if(xcc[t] == xcc[q]) {
+                pairs++;
+                xcc[q] = -1;
+                break;
+            }
+        }
+    }
+
+    printf("%d\n", pairs);
+    return 0;
+}

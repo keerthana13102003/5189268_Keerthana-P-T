@@ -1,0 +1,25 @@
+//problem 5
+
+#include <stdio.h>
+int main (){
+   int U,Y;
+char s[150],r[150];
+
+scanf("%d",&U);
+scanf("%s",s);
+scanf("%d",&Y);
+
+Y=Y%26;
+
+for(int i=0;i<U;i++){
+char c=s[i];
+if(c>='A'&&c<='Z')r[i]=(c-'A'+Y)%26+'A';
+else if(c>='a'&&c<='z')r[i]=(c-'a'+Y)%26+'a';
+else r[i]=c;
+}
+
+r[U]='\0';
+printf("%s\n",r);
+
+return 0;
+}

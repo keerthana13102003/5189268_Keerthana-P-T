@@ -1,0 +1,15 @@
+//problem 4
+
+#include<stdio.h>
+#include<stdlib.h>
+int main() {
+    int F, D;
+    scanf("%d",&F);
+    while(F--){
+        int S,Z,outans;
+        scanf("%d%d",&S,&Z);
+        outans=(Z==1||S%2==0)?2:1;
+        printf("%d\n",outans);
+    }
+    return 0;
+}
