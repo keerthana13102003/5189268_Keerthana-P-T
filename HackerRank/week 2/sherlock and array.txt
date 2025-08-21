@@ -1,0 +1,17 @@
+#include<stdio.h>
+
+int main(){
+    int T;scanf("%d",&T);
+    while(T--){
+        int N;scanf("%d",&N);
+        long long G=0,H=0;int K[N];
+        for(int i=0;i<N;i++){scanf("%d",&K[i]);G+=K[i];}
+        int f=0;
+        for(int i=0;i<N;i++){
+            if(H==G-H-K[i]){f=1;break;}
+            H+=K[i];
+        }
+        if(f)printf("YES\n");else printf("NO\n");
+    }
+    return 0;
+}

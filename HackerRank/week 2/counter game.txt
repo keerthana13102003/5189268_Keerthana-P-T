@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<math.h>
+ 
+ long long power2(long long x){
+    return (x&(x-1))==0;
+}
+
+long long bigpow(long long x){
+    long long y=1;
+    while(y*2<=x) y*=2;
+    return y;
+}
+
+int main(){
+    int T;scanf("%d",&T);
+    while(T--){
+        long long N;scanf("%lld",&N);
+        int G=0;
+        while(N>1){
+            if(power2(N)) N/=2;
+            else N-=bigpow(N);
+            G^=1;
+        }
+        if(G) printf("Louise\n");
+        else printf("Richard\n");
+    }
+    return 0;
+}

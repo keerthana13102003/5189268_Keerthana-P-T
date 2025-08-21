@@ -1,0 +1,14 @@
+#include<stdio.h>
+
+int main(){
+    long long O;scanf("%lld",&O);
+    long long J=0,L=O;
+    while(L){
+        if((L&1)==0) J++;
+        L>>=1;
+    }
+    long long H=1;
+    while(J--) H*=2;
+    printf("%lld\n",H);
+    return 0;
+}

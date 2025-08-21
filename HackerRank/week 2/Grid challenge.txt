@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int K(const void*A,const void*B){return(*(const char*)A-*(const char*)B);}
+
+int main(){
+    int A,B,C,D,E,F,G,H,I,L,M,N;
+    char J[205][205];
+    scanf("%d",&A);
+    for(B=0;B<A;B++){
+        scanf("%d",&C);
+        for(D=0;D<C;D++){
+            scanf("%s",J[D]);
+            qsort(J[D],strlen(J[D]),sizeof(char),K);
+        }
+        E=1;
+        for(D=0;D<C-1;D++){
+            for(G=0;G<C;G++){
+                if(J[D][G]>J[D+1][G]){E=0;break;}
+            }
+            if(!E)break;
+        }
+        if(E)printf("YES\n");else printf("NO\n");
+    }
+    return 0;
+}
