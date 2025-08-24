@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<string.h>
+int k[26];
+int main(){
+    char j[100005];
+    scanf("%s",j);
+    int r=strlen(j),b,t,e=0,m=0;
+    for(b=0;b<r;b++)k[j[b]-'a']++;
+    for(b=0;b<26;b++)if(k[b]>0){
+        if(t==0)t=k[b];
+        if(k[b]!=t){
+            if(m==0&&((k[b]==t+1)||(k[b]==1)))m=1;
+            else{printf("NO\n");return 0;}
+        }
+    }
+    printf("YES\n");
+    return 0;
+}

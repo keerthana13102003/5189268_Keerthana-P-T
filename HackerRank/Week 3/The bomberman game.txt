@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+int r,e;
+long long t;
+char k[205][205],j[205][205],m[205][205];
+void f(char a[205][205],char b[205][205]){
+    int x,y;
+    for(x=0;x<r;x++){
+        for(y=0;y<e;y++)b[x][y]='O';
+        b[x][e]='\0';
+    }
+    for(x=0;x<r;x++){
+        for(y=0;y<e;y++){
+            if(a[x][y]=='O'){
+                b[x][y]='.';
+                if(x>0)b[x-1][y]='.';
+                if(x+1<r)b[x+1][y]='.';
+                if(y>0)b[x][y-1]='.';
+                if(y+1<e)b[x][y+1]='.';
+            }
+        }
+    }
+}
+int main(){
+    int b;
+    scanf("%d%d%lld",&r,&e,&t);
+    for(b=0;b<r;b++)scanf("%s",k[b]);
+    if(t==1){
+        for(b=0;b<r;b++)printf("%s\n",k[b]);
+        return 0;
+    }
+    if(t%2==0){
+        for(b=0;b<r;b++){
+            for(int c=0;c<e;c++)printf("O");
+            printf("\n");
+        }
+        return 0;
+    }
+    f(k,j);
+    if(t%4==3){
+        for(b=0;b<r;b++)printf("%s\n",j[b]);
+        return 0;
+    }
+    f(j,m);
+    for(b=0;b<r;b++)printf("%s\n",m[b]);
+    return 0;
+}

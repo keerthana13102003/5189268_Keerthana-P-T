@@ -1,0 +1,18 @@
+#include<stdio.h>
+int S[200005],G[200005],F[200005];
+int main(){
+    int T,R,E,W;
+    scanf("%d",&T);
+    for(R=0;R<T;R++)scanf("%d",&S[R]);
+    scanf("%d",&E);
+    for(R=0;R<E;R++)scanf("%d",&G[R]);
+    F[0]=S[0];
+    int m=1;
+    for(R=1;R<T;R++)if(S[R]!=F[m-1])F[m++]=S[R];
+    W=m-1;
+    for(R=0;R<E;R++){
+        while(W>=0&&G[R]>=F[W])W--;
+        printf("%d\n",W+2);
+    }
+    return 0;
+}
