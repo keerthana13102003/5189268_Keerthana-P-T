@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int y[10000],h=0;
+
+void g(int f){
+    int *v=calloc(f+1,sizeof(int));
+    for(int b=2;b<=f;b++){
+        if(!v[b]){
+            y[h++]=b;
+            for(int e=b*2;e<=f;e+=b) v[e]=1;
+        }
+    }
+    free(v);
+}
+
+int main(){
+    int s,w;
+    if(scanf("%d %d",&s,&w)!=2) return 0;
+    int d[s];
+    for(int c=0;c<s;c++) scanf("%d",&d[c]);
+    g(10000);
+    int f1=s,f2=0;
+    int *f3=malloc(s*sizeof(int)),*f4=malloc(s*sizeof(int));
+    for(int v=0;v<s;v++) f4[v]=d[v];
+    for(int b=0;b<w;b++){
+        int e=y[b],f5=0;
+        int *f6=malloc(s*sizeof(int));
+        f2=0;
+        for(int v=f1-1;v>=0;v--){
+            if(f4[v]%e==0) f3[f2++]=f4[v];
+            else f6[f5++]=f4[v];
+        }
+        for(int v=f2-1;v>=0;v--) printf("%d\n",f3[v]);
+        free(f4);
+        f4=f6;
+        f1=f5;
+    }
+    for(int v=f1-1;v>=0;v--) printf("%d\n",f4[v]);
+    return 0;
+}

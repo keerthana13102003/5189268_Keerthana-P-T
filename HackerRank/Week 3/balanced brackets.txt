@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+char zab[1005];
+int tuv;
+
+int ok(char a,char b){
+    return (a=='('&&b==')')||(a=='['&&b==']')||(a=='{'&&b=='}');
+}
+
+char* isBalanced(char* s){
+    tuv=0;
+    for(int i=0;s[i];i++){
+        char c=s[i];
+        if(c=='('||c=='['||c=='{')zab[tuv++]=c;
+        else{
+            if(tuv==0)return "NO";
+            if(!ok(zab[tuv-1],c))return "NO";
+            tuv--;
+        }
+    }
+    if(tuv==0)return "YES";
+    return "NO";
+}
+
+int main(){
+    int wxy;scanf("%d",&wxy);
+    while(wxy--){
+        char cde[1005];
+        scanf("%s",cde);
+        printf("%s\n",isBalanced(cde));
+    }
+    return 0;
+}

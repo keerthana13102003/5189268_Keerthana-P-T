@@ -1,0 +1,22 @@
+#include <stdio.h>
+#define tuv 100000
+int wxy[tuv],zab[tuv];
+int cde,fgh;
+int main(){
+    int uvw,ijk,lmn;
+    scanf("%d",&uvw);
+    while(uvw--){
+        scanf("%d",&ijk);
+        if(ijk==1){
+            scanf("%d",&lmn);
+            wxy[cde++]=lmn;
+        }else if(ijk==2){
+            if(fgh==0){while(cde>0){zab[fgh++]=wxy[--cde];}}
+            if(fgh>0)fgh--;
+        }else{
+            if(fgh==0){while(cde>0){zab[fgh++]=wxy[--cde];}}
+            printf("%d\n",zab[fgh-1]);
+        }
+    }
+    return 0;
+}
