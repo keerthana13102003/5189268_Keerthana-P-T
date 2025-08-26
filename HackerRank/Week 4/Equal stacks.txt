@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int ud[3];
+    if(scanf("%d%d%d",&ud[0],&ud[1],&ud[2])!=3) return 0;
+    int *Kee=(int*)malloc(sizeof(int)*ud[0]);
+    int *rth=(int*)malloc(sizeof(int)*ud[1]);
+    int *ana=(int*)malloc(sizeof(int)*ud[2]);
+    int da;
+    for(da=0;da<ud[0];da++) scanf("%d",&Kee[da]);
+    for(da=0;da<ud[1];da++) scanf("%d",&rth[da]);
+    for(da=0;da<ud[2];da++) scanf("%d",&ana[da]);
+    int pt[3]={0,0,0};
+    int gow[3]={0,0,0};
+    for(da=0;da<ud[0];da++) gow[0]+=Kee[da];
+    for(da=0;da<ud[1];da++) gow[1]+=rth[da];
+    for(da=0;da<ud[2];da++) gow[2]+=ana[da];
+    while(!(gow[0]==gow[1]&&gow[1]==gow[2])){
+        if(gow[0]>=gow[1]&&gow[0]>=gow[2]){
+            if(pt[0]<ud[0]) gow[0]-=Kee[pt[0]++];
+            else gow[0]=0;
+        }else if(gow[1]>=gow[0]&&gow[1]>=gow[2]){
+            if(pt[1]<ud[1]) gow[1]-=rth[pt[1]++];
+            else gow[1]=0;
+        }else{
+            if(pt[2]<ud[2]) gow[2]-=ana[pt[2]++];
+            else gow[2]=0;
+        }
+    }
+    printf("%d\n",gow[0]);
+    free(Kee);free(rth);free(ana);
+    return 0;
+}

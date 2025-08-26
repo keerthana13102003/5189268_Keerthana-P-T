@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void maxSubarray(int *Kee,int rth){
+    int ana=Kee[0],pt=Kee[0],ud=Kee[0],ay=0;
+    if(Kee[0]>0)ay=ay+Kee[0];
+    for(int gow=1;gow<rth;gow++){
+        if(pt+Kee[gow]>Kee[gow])pt=pt+Kee[gow];else pt=Kee[gow];
+        if(pt>ana)ana=pt;
+        if(Kee[gow]>0)ay=ay+Kee[gow];
+        if(Kee[gow]>ud)ud=Kee[gow];
+    }
+    if(ay==0)ay=ud;
+    printf("%d %d\n",ana,ay);
+}
+
+int main(){
+    int da;
+    if(scanf("%d",&da)!=1) return 0;
+    while(da--){
+        int rth;
+        scanf("%d",&rth);
+        int Kee[rth];
+        for(int gow=0;gow<rth;gow++)scanf("%d",&Kee[gow]);
+        maxSubarray(Kee,rth);
+    }
+    return 0;
+}

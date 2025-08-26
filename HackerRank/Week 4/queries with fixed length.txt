@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+int f(int i,int u){return i>u?i:u;}
+int g(int i,int u){return i<u?i:u;}
+void h(){
+int i,u;scanf("%d%d",&i,&u);
+int*y=(int*)malloc(i*sizeof(int));
+for(int t=0;t<i;t++)scanf("%d",&y[t]);
+while(u--){
+int r;scanf("%d",&r);
+int*e=(int*)malloc(i*sizeof(int));
+int d=0,f=-1,b=1e9+7;
+for(int t=0;t<i;t++){
+while(d<=f&&y[e[f]]<=y[t])f--;
+e[++f]=t;
+if(e[d]<=t-r)d++;
+if(t>=r-1){
+int n=y[e[d]];
+b=g(b,n);
+}}
+printf("%d\n",b);
+free(e);}
+free(y);}
+int main(){h();return 0;}

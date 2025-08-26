@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+long arrayManipulation(int i,int u,int y[ ][3]){
+long *t=(long*)calloc(i+2,sizeof(long));
+for(int r=0;r<u;r++){
+int e=y[r][0],d=y[r][1],f=y[r][2];
+t[e]+=f;
+t[d+1]-=f;
+}
+long g=0,b=0;
+for(int h=1;h<=i;h++){
+b+=t[h];
+if(b>g)g=b;
+}
+free(t);
+return g;
+}
+int main(){
+int n,m;
+scanf("%d%d",&n,&m);
+int y[m][3];
+for(int j=0;j<m;j++)scanf("%d%d%d",&y[j][0],&y[j][1],&y[j][2]);
+printf("%ld",arrayManipulation(n,m,y));
+}

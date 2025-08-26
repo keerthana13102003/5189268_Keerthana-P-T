@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmp(const void*O,const void*J){
+    return(*(int*)O-*(int*)J);
+}
+
+int main(){
+    int O,J;
+    scanf("%d %d",&O,&J);
+    int*H=(int*)malloc(sizeof(int)*O);
+    for(int K=0;K<O;K++){
+        scanf("%d",&H[K]);
+    }
+    qsort(H,O,sizeof(int),cmp);
+    int L=0,M=0,N=0;
+    while(L<O){
+        N++;
+        int B=L;
+        while(B<O && H[B]<=H[L]+J)B++;
+        B--;
+        int D=B;
+        while(D<O && H[D]<=H[B]+J)D++;
+        L=D;
+    }
+    printf("%d",N);
+    free(H);
+    return 0;
+}

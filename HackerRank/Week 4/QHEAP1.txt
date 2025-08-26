@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct{
+    long long *a;
+    int size;
+}Heap;
+
+void swap(long long *x,long long *y){
+    long long t=*x;*x=*y;*y=t;
+}
+
+void heapifyUp(Heap *h,int i){
+    while(i>0){
+        int p=(i-1)/2;
+        if(h->a[p]>h->a[i]){
+            swap(&h->a[p],&h->a[i]);
+            i=p;
+        }else break;
+    }
+}
+
+void heapifyDown(Heap *h,int i){
+    while(1){
+        int l=2*i+1,r=2*i+2,sm=i;
+        if(l<h->size&&h->a[l]<h->a[sm])sm=l;
+        if(r<h->size&&h->a[r]<h->a[sm])sm=r;
+        if(sm!=i){
+            swap(&h->a[sm],&h->a[i]);
+            i=sm;
+        }else break;
+    }
+}
+
+void insert(Heap *h,long long v){
+    h->a[h->size++]=v;
+    heapifyUp(h,h->size-1);
+}
+
+void removeValue(Heap *h,long long v){
+    int i;
+    for(i=0;i<h->size;i++){
+        if(h->a[i]==v)break;
+    }
+    if(i<h->size){
+        h->a[i]=h->a[h->size-1];
+        h->size--;
+        heapifyUp(h,i);
+        heapifyDown(h,i);
+    }
+}
+
+int main(){
+    int k;
+    scanf("%d",&k);
+    Heap h;
+    h.a=(long long*)malloc(sizeof(long long)*k);
+    h.size=0;
+    while(k--){
+        int f;
+        scanf("%d",&f);
+        if(f==1){
+            long long v;
+            scanf("%lld",&v);
+            insert(&h,v);
+        }else if(f==2){
+            long long v;
+            scanf("%lld",&v);
+            removeValue(&h,v);
+        }else{
+            printf("%lld\n",h.a[0]);
+        }
+    }
+    free(h.a);
+    return 0;
+}
