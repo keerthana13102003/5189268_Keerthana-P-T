@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct N{
+    struct N* T[10];
+    int G;
+}N;
+
+N* hnew(){
+    N* K=(N*)malloc(sizeof(N));
+    for(int G=0;G<10;G++)K->T[G]=NULL;
+    K->G=0;
+    return K;
+}
+
+int Kinsert(N* K,char* H){
+    N* T=K;
+    for(int G=0;H[G];G++){
+        int N=H[G]-'a';
+        if(!T->T[N])T->T[N]=hnew();
+        T=T->T[N];
+        if(T->G)return 0;
+    }
+    for(int G=0;G<10;G++){
+        if(T->T[G])return 0;
+    }
+    T->G=1;
+    return 1;
+}
+
+int main(){
+    int T;
+    scanf("%d",&T);
+    char G[100005][64];
+    for(int K=0;K<T;K++)scanf("%s",G[K]);
+    N* root=hnew();
+    for(int K=0;K<T;K++){
+        if(!Kinsert(root,G[K])){
+            printf("BAD SET\n%s\n",G[K]);
+            return 0;
+        }
+    }
+    printf("GOOD SET\n");
+    return 0;
+}

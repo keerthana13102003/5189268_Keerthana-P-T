@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int cmp(const void*a,const void*b){
+    return(*(int*)a-*(int*)b);
+}
+
+int main(){
+    int T;
+    scanf("%d",&T);
+    int G[T],H[T],K[T],N[T];
+    for(int i=0;i<T;i++){
+        scanf("%d",&G[i]);
+        H[i]=G[i];
+    }
+    qsort(H,T,sizeof(int),cmp);
+    for(int i=0;i<T;i++)K[i]=G[i];
+    int a=0,b=0;
+    for(int i=0;i<T;i++)N[i]=0;
+    for(int i=0;i<T;i++){
+        if(N[i]||H[i]==G[i])continue;
+        int j=i,cyc=0;
+        while(!N[j]){
+            N[j]=1;
+            j=(int)( (int*)(bsearch(&G[j],H,T,sizeof(int),cmp))-H );
+            cyc++;
+        }
+        if(cyc>0)a+=cyc-1;
+    }
+    for(int i=0;i<T;i++)N[i]=0;
+    for(int i=0;i<T;i++){
+        if(N[i]||H[T-1-i]==K[i])continue;
+        int j=i,cyc=0;
+        while(!N[j]){
+            N[j]=1;
+            j=(int)( (int*)(bsearch(&K[j],H,T,sizeof(int),cmp))-H );
+            j=T-1-j;
+            cyc++;
+        }
+        if(cyc>0)b+=cyc-1;
+    }
+    if(a<b)printf("%d\n",a);else printf("%d\n",b);
+    return 0;
+}

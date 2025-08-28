@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct N{char c;int f;struct N*l,*r;}N;
+
+N*mk(char ch,int fq){N*p=(N*)malloc(sizeof(N));p->c=ch;p->f=fq;p->l=p->r=NULL;return p;}
+
+void swap(N**a,N**b){N*t=*a;*a=*b;*b=t;}
+
+void push(N*heap[],int*hs,N*node){
+    heap[(*hs)++]=node;
+    int i=*hs-1;
+    while(i>0){
+        int p=(i-1)/2;
+        if(heap[p]->f<=heap[i]->f)break;
+        swap(&heap[p],&heap[i]);
+        i=p;
+    }
+}
+
+N*popmin(N*heap[],int*hs){
+    if(*hs==0)return NULL;
+    N*r=heap[0];
+    heap[0]=heap[--(*hs)];
+    int i=0;
+    while(1){
+        int l=2*i+1,rch=2*i+2,sm=i;
+        if(l<*hs&&heap[l]->f<heap[sm]->f)sm=l;
+        if(rch<*hs&&heap[rch]->f<heap[sm]->f)sm=rch;
+        if(sm==i)break;
+        swap(&heap[i],&heap[sm]);
+        i=sm;
+    }
+    return r;
+}
+
+void gencodes(N*root,char**codes,char*buf,int depth){
+    if(!root)return;
+    if(!root->l&&!root->r){
+        if(depth==0){buf[0]='0';buf[1]=0;codes[(unsigned char)root->c]=strdup(buf);return;}
+        buf[depth]=0;codes[(unsigned char)root->c]=strdup(buf);return;
+    }
+    buf[depth]='0';gencodes(root->l,codes,buf,depth+1);
+    buf[depth]='1';gencodes(root->r,codes,buf,depth+1);
+}
+
+int main(){
+    static char s[200005];
+    if(scanf("%199999s",s)!=1)return 0;
+    int n=strlen(s);
+    if(n==0){printf("\n");return 0;}
+    int freq[256]={0};
+    for(int i=0;i<n;i++)freq[(unsigned char)s[i]]++;
+    N*heap[300];int hs=0;
+    for(int i=0;i<256;i++)if(freq[i]>0)push(heap,&hs,mk((char)i,freq[i]));
+    if(hs==0){printf("\n");return 0;}
+    while(hs>1){
+        N*a=popmin(heap,&hs);
+        N*b=popmin(heap,&hs);
+        N*u=mk(0,a->f+b->f);
+        u->l=a;u->r=b;
+        push(heap,&hs,u);
+    }
+    N*root=popmin(heap,&hs);
+    char*codes[256];for(int i=0;i<256;i++)codes[i]=NULL;
+    char buf[1000];
+    gencodes(root,codes,buf,0);
+    int cap= n*8+10;
+    char*enc=(char*)malloc(cap);
+    enc[0]=0;int el=0;
+    for(int i=0;i<n;i++){
+        char*cd=codes[(unsigned char)s[i]];
+        int L=strlen(cd);
+        if(el+L+2>cap){cap*=2;enc=realloc(enc,cap);}
+        memcpy(enc+el,cd,L);el+=L;enc[el]=0;
+    }
+    char*out=(char*)malloc(n+10);int oi=0;
+    N*cur=root;
+    if(!root->l&&!root->r){
+        for(int i=0;i<n;i++)out[oi++]=root->c;
+    }else{
+        for(int i=0;i<el;i++){
+            cur=(enc[i]=='0')?cur->l:cur->r;
+            if(!cur->l&&!cur->r){out[oi++]=cur->c;cur=root;}
+        }
+    }
+    out[oi]=0;
+    printf("%s\n",out);
+    return 0;
+}
